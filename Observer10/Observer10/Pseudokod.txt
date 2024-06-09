@@ -1,0 +1,57 @@
+﻿Interfejs IObserver:
+    Metoda Update(scores)
+
+Interfejs ISubject:
+    Metoda RegisterObserver(observer)
+    Metoda RemoveObserver(observer)
+    Metoda NotifyObservers()
+
+Klasa Game implementuje ISubject:
+    Lista obserwatorów
+    Tablica wyników graczy
+
+    Metoda RegisterObserver(observer):
+        Dodaj observer do listy obserwatorów
+
+    Metoda RemoveObserver(observer):
+        Usuń observer z listy obserwatorów
+
+    Metoda NotifyObservers():
+        Dla każdego obserwatora w liście obserwatorów:
+            Wywołaj Update(scores) na obserwatorze
+
+    Metoda UpdateScore(playerName, score):
+        Jeśli playerName jest w tablicy wyników:
+            Zaktualizuj wynik gracza
+        Inaczej:
+            Dodaj playerName do tablicy wyników
+        Powiadom obserwatorów
+
+Klasa Player implementuje IObserver:
+    Nazwa gracza
+    Referencja do gry
+
+    Konstruktor Player(name, game):
+        Ustaw nazwę gracza
+        Zarejestruj gracza jako obserwatora w grze
+
+    Metoda Update(scores):
+        Wyświetl zaktualizowaną tablicę wyników
+
+    Metoda Unsubscribe():
+        Wypisz się z listy obserwatorów w grze
+
+Przykład użycia:
+    Utwórz instancję gry
+    Utwórz graczy Player1, Player2, Player3 i zarejestruj ich w grze
+
+    Zaktualizuj wyniki graczy:
+        UpdateScore(Gracz1, 10)
+        UpdateScore(Gracz2, 15)
+        UpdateScore(Gracz3, 20)
+
+    Player3 wypisuje się z obserwatorów
+
+    Ponownie zaktualizuj wyniki:
+        UpdateScore(Gracz1, 25)
+        UpdateScore(Gracz2, 30)
